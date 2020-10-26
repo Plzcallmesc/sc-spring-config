@@ -1,0 +1,28 @@
+server:
+  port: ${port:9091} #JYM如果已经提供端口port，用port，如果没有用9091做端口
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud
+    username: root
+    password: root
+  application:
+    name: user-service #配置服务应用名称，可注册到eureka注册中心
+mybatis:
+  type-aliases-package: com.itheima.user.model
+eureka:
+  client:
+    service-url:
+      # eureka 服务地址，如果是集群的话；需要指定其它集群eureka地址，用逗号隔开
+#      defaultZone: http://127.0.0.1:10009/eureka,http://127.0.0.1:10009/eureka
+      # eureka 服务地址
+      defaultZone: http://127.0.0.1:10009/eureka
+  instance:
+    # 使用ip地址，而不是host名
+    prefer-ip-address: true
+    # ip地址
+    ip-address: 127.0.0.1
+    # 续约间隔，默认30秒，每30秒向eureka 发送一次心跳
+    lease-renewal-interval-in-seconds: 30
+    # 服务失效时间，默认90秒 若30s一次的心跳包eureka未收到 90s后会将该服务设置为失效状态
+    lease-expiration-duration-in-seconds: 90
